@@ -10,6 +10,11 @@
     props: {
         swicth: Object,
     },
+    // Нужно еще добавить инструмент который будет удалять нужную линию при удалении связи
+    // Возможно нужно добавлять id линиям или каким-то еще способом, возможно пусть будут 
+    // Нарисованы сразу все линии и добавить состояние для линий
+
+    // Есть проблема с y нужно будет поправить, а именно не правильно высчитывается положение сверху от страницы, все кроме первых
     mounted() {
         window.addEventListener('load', () => {
             const swicthPosition = document.getElementById(`swicth${this.swicth.id}`).getBoundingClientRect();
@@ -48,10 +53,19 @@
 
                     // Тут какая-то ошибка иногда вектор отображается не в ту сторону на ровно на 180 градусов
                     // Нужно понять в каких и добавить не 90 градусов, а 270
+                    console.log(tang);
+                    console.log(this.swicth.id)
+                    // debugger;
+
+
                     if (tang < 0) {
-                        angle = 90 + angle;
+                        angle = 270 + angle;
                     } else if (tang > 0) {
                         angle = -(90 - angle);
+                    }
+                    // разворот всех стрелок которые с права (не четные) на 180 градусов
+                    if (this.swicth.id % 2 == 0) {
+                        angle = 180 + angle;
                     }
 
                     line.style.transform = `translate(${start.x}px, ${start.y}px) rotate(${angle}deg) translateZ(0)`;
@@ -61,9 +75,7 @@
                     console.log(start.y)
                 }
             });
-        })
-        
-        
+        })   
     }
   }
   </script>
@@ -83,7 +95,6 @@
     }
 
     .line {
-        z-index: 3;
         position: absolute;
         width: 2.5px;
         background-color: red;

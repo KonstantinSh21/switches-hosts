@@ -32,7 +32,7 @@ export default {
     return {
       swicthes: [
       {
-        id: 12123,
+        id: 1,
         idHost: [19321383, 2232134, 33241, 423423]
       },
       {
