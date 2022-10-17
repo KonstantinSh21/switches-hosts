@@ -2,13 +2,18 @@
     <div :id="`swicth${swicth.id}`" class="swicthes">
         swicthes {{ swicth.id }}
     </div>
-  </template>
+</template>
   
-  <script>
+<script>
   export default {
     name: 'Swicthes',
     props: {
         swicth: Object,
+    },
+    data() {
+        return {
+            lines: []
+        }
     },
     // Нужно еще добавить инструмент который будет удалять нужную линию при удалении связи
     // Возможно нужно добавлять id линиям или каким-то еще способом, возможно пусть будут 
@@ -18,13 +23,16 @@
     mounted() {
         window.addEventListener('load', () => {
             const swicthPosition = document.getElementById(`swicth${this.swicth.id}`).getBoundingClientRect();
-            
+            console.log(this.swicth.id);
             // нужно будет доработать x двя вариантов когда свич справо
             // Обозначение начальных координат линии от свича
             const start = {
                 x: swicthPosition.x + swicthPosition.width,
-                y: (swicthPosition.height / 2) + swicthPosition.top,
+                y: (swicthPosition.height / 2) + swicthPosition.top
             }
+
+            // console.log(start.y);
+            // debugger;
 
             const app = document.getElementById('app')
             
@@ -33,7 +41,7 @@
                 if(`host${element}` === document.getElementById(`host${element}`).id) {
                     const hostPosition = document.getElementById(`host${element}`).getBoundingClientRect();
         
-                    let d, tang, arctg, angle, scale, final;
+                    let d, tang, arctg, angle, final;
                     // Обозначение конечных координат линии до хоста
                     final = {
                         x: (hostPosition.width / 2) + hostPosition.x,
@@ -42,7 +50,9 @@
                     
                     // Создаю линию и добавляю ее в #app
                     let line = document.createElement('div');
-                    line.className = 'line'; // Линия 
+                    line.className = 'line'; // Линия
+                    this.lines.push({id: this.lines.length})
+                    line.id = this.lines.length; // Линия
                     app.appendChild(line);
 
                     d = Math.sqrt(Math.pow((final.x - start.x), 2) + Math.pow((final.y - start.y), 2)); // длина прямой после анимации
@@ -53,9 +63,8 @@
 
                     // Тут какая-то ошибка иногда вектор отображается не в ту сторону на ровно на 180 градусов
                     // Нужно понять в каких и добавить не 90 градусов, а 270
-                    console.log(tang);
-                    console.log(this.swicth.id)
-                    // debugger;
+                    // console.log(tang);
+                    // console.log(this.swicth.id)
 
 
                     if (tang < 0) {
@@ -71,12 +80,17 @@
                     line.style.transform = `translate(${start.x}px, ${start.y}px) rotate(${angle}deg) translateZ(0)`;
                     
                     line.style.height = (d + 'px')
-                    console.log(start.x)
-                    console.log(start.y)
                 }
             });
         })   
-    }
+    }, 
+    computed: {
+        getHeightLineStart(swicthPosition) {
+            let swicthPositionTopPlus = (swicthPosition.height / 2) + swicthPosition.top
+            let swicthPositionTopMinus = (swicthPosition.height / 2) - swicthPosition.top
+            return swicthPosition.top ? swicthPositionTopPlus : swicthPositionTopMinus
+        }
+    },
   }
   </script>
   

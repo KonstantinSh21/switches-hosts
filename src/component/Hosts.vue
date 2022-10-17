@@ -24,7 +24,7 @@
     box-sizing: border-box;
     background: #000;
     align-items: center;
-    color: blueviolet;
+    color: red;
     z-index: 4;
   }
 
