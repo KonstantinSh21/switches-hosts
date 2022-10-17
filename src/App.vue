@@ -89,13 +89,4 @@ export default {
   transform: translateX(-50%);
 
 }
-
-#wrapper-line-left {
-  position: absolute;
-  height: 100%;
-  width: 1px;
-  top: 0;
-  left: 200px;
-  background-color: blue;
-}
 </style>
