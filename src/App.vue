@@ -8,14 +8,14 @@
       />
     </div>
     <div class="wrapper-hosts">
-      <Hosts 
+      <Hosts
         v-for="host in hosts"
         :key="host.id"
         :host="host"
       />
     </div>
     <!-- <div id="wrapper-line-left"></div> -->
-    
+
   </div>
 </template>
 
@@ -87,7 +87,7 @@ export default {
   top: 0;
   left: 50%;
   transform: translateX(-50%);
-  
+
 }
 
 #wrapper-line-left {
