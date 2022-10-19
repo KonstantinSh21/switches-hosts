@@ -5,6 +5,8 @@
 </template>
 
 <script>
+
+
 export default {
   name: 'Swicthes',
   props: {
@@ -12,33 +14,33 @@ export default {
   },
   data() {
     return {
-      lines: []
+      lines: [],
     }
   },
-
-  // Есть проблема с y нужно будет поправить, а именно не правильно высчитывается положение сверху от страницы, все кроме первых
   mounted() {
     window.addEventListener('load', () => {
-      const swicthPosition = document.getElementById(`swicth${this.swicth.id}`).getBoundingClientRect();
+      const swicth = document.getElementById(`swicth${this.swicth.id}`);
+      const swicthPosition = swicth.getBoundingClientRect();
 
       const start = {
         x: this.getXPosition(this.swicth, swicthPosition),
-        y: (swicthPosition.height / 2) + swicthPosition.top
+        y: (swicthPosition.height / 2) + swicth.offsetTop
       };
 
       const app = document.getElementById('app');
 
       this.swicth.idHost.forEach(element => {
-        const host = `host${element}`;
+        const hostName = `host${element}`;
 
-        if (host === document.getElementById(host).id) {
+        if (hostName === document.getElementById(hostName).id) {
           let height, tang, arctg, angle, final;
-          const hostPosition = document.getElementById(host).getBoundingClientRect();
+          const host = document.getElementById(hostName);
+          const hostPosition = host.getBoundingClientRect();
 
           // Обозначение конечных координат линии до хоста
           final = {
             x: (hostPosition.width / 2) + hostPosition.x,
-            y: (hostPosition.height / 2) + hostPosition.top,
+            y: (hostPosition.height / 2) + host.offsetTop,
           };
 
           // Создаю линию и добавляю ее в #app
@@ -67,7 +69,7 @@ export default {
           line.style.transform = `translate(${start.x}px, ${start.y}px) rotate(${angle}deg) translateZ(0)`;
           line.style.height = (height + 'px');
         } else {
-
+          
         }
       });
     })
