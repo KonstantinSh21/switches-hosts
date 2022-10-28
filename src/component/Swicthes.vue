@@ -19,6 +19,16 @@ export default {
   },
   mounted() {
     window.addEventListener('load', () => {
+      this.positionLine()
+    })
+  },
+  methods: {
+    getXPosition(swicth, swicthPosition) {
+      let x;
+      swicth.id % 2 === 0 ? x = swicthPosition.x : x = swicthPosition.x + swicthPosition.width;
+      return x;
+    },
+    positionLine() {
       const swicth = document.getElementById(`swicth${this.swicth.id}`);
       const swicthPosition = swicth.getBoundingClientRect();
 
@@ -46,11 +56,11 @@ export default {
           // Создаю линию и добавляю ее в #app
           let line = document.createElement('div');
           line.className = 'line'; // Линия
-          this.lines.push({id: this.lines.length});
+          line.id = element.toString() + this.swicth.idSwitch.toString();
           app.appendChild(line);
 
-          height = Math.sqrt(Math.pow((final.x - start.x), 2) + Math.pow((final.y - start.y), 2)); // длина прямой после анимации
-          tang = (final.y - start.y) / (final.x - start.x) // Тангенс
+          height = Math.sqrt(Math.pow((final.x - start.x), 2) + Math.pow((final.y - start.y), 2)) - 50; // длина прямой после анимации
+          tang = (final.y - start.y) / (final.x - start.x); // Тангенс
           arctg = Math.atan(tang); // Арктангенс
           angle = arctg * 180 / Math.PI; // угол в градусах
 
@@ -68,22 +78,10 @@ export default {
           // назначаю
           line.style.transform = `translate(${start.x}px, ${start.y}px) rotate(${angle}deg) translateZ(0)`;
           line.style.height = (height + 'px');
-        } else {
-          
         }
       });
-    })
-  },
-  methods: {
-    getXPosition(swicth, swicthPosition) {
-      let x;
-      swicth.id % 2 === 0 ? x = swicthPosition.x : x = swicthPosition.x + swicthPosition.width;
-      return x;
     }
   },
-  watch: {
-
-  }
 }
 </script>
 
@@ -104,11 +102,16 @@ export default {
 .line {
   position: absolute;
   width: 2.5px;
-  background-color: red;
+  background-color: #000000;
   height: 80px;
   left: 0;
   top: 0;
   transform: translateZ(0);
   transform-origin: 50% 0%;
+}
+
+.line:hover {
+  background-color: red;
+  z-index: 1;
 }
 </style>
