@@ -32,27 +32,132 @@ export default {
       {
         id: 1,
         idSwitch: 1312343223,
-        idHost: [2232134, 33241, 423423, 54363634, 634234235, 7656456456, 8324234, 94324224234234]
+        idHost: [
+          {
+            id: 2232134,
+            transform: null,
+            height: null
+          },
+          {
+            id: 634234235,
+            transform: null,
+            height: null
+          },
+          {
+            id: 7656456456,
+            transform: null,
+            height: null
+          },
+          {
+            id: 8324234,
+            transform: null,
+            height: null
+          }
+        ]
       },
       {
         id: 2,
         idSwitch: 234232413123,
-        idHost: [2232134, 634234235, 7656456456, 8324234]
+        idHost: [
+          {
+            id: 2232134,
+            transform: null,
+            height: null
+          },
+          {
+            id: 634234235,
+            transform: null,
+            height: null
+          },
+          {
+            id: 7656456456,
+            transform: null,
+            height: null
+          },
+          {
+            id: 8324234,
+            transform: null,
+            height: null
+          }
+        ]
       },
       {
         id: 3,
         idSwitch: 343413123,
-        idHost: [423423, 33241, 8324234]
+        idHost: [
+          {
+            id: 2232134,
+            transform: null,
+            height: null
+          },
+          {
+            id: 634234235,
+            transform: null,
+            height: null
+          },
+          {
+            id: 7656456456,
+            transform: null,
+            height: null
+          },
+          {
+            id: 8324234,
+            transform: null,
+            height: null
+          }
+        ]
       },
       {
         id: 4,
         idSwitch: 41233123,
-        idHost: [2232134, 54363634, 94324224234234]
+        idHost: [
+          {
+            id: 2232134,
+            transform: null,
+            height: null
+          },
+          {
+            id: 634234235,
+            transform: null,
+            height: null
+          },
+          {
+            id: 7656456456,
+            transform: null,
+            height: null
+          },
+          {
+            id: 8324234,
+            transform: null,
+            height: null
+          }
+        ]
       },
       {
         id: 5,
         idSwitch: 53123423,
-        idHost: [19321383, 33241, 54363634]
+        idHost: [
+          {
+            id: 2232134,
+            transform: null,
+            height: null
+          },
+          {
+            id: 634234235,
+            transform: null,
+            height: null
+          },
+          {
+            id: 7656456456,
+            transform: null,
+            height: null
+          },
+          {
+            id: 8324234,
+            transform: null,
+            height: null
+          }
+        ]
       },
      ],
       hosts: [

@@ -1,7 +1,13 @@
 <template>
-  <div :id="`swicth${swicth.id}`" class="swicthes">
-    swicthes {{ swicth.id }}
-  </div>
+    <div :id="`swicth${swicth.id}`" class="swicthes">
+      swicthes {{ swicth.id }}
+      <div v-for="line of swicth.idHost">
+        <div 
+          class="line"
+          :style='{transform: line.transform, height: line.height}'
+        ></div>
+      </div>
+    </div>
 </template>
 
 <script>
@@ -12,16 +18,13 @@ export default {
   props: {
     swicth: Object,
   },
-  data() {
-    return {
-      lines: [],
-    }
-  },
+
   mounted() {
     window.addEventListener('load', () => {
-      this.positionLine()
+      this.positionLine();
     })
   },
+  
   methods: {
     getXPosition(swicth, swicthPosition) {
       let x;
@@ -37,13 +40,12 @@ export default {
         y: (swicthPosition.height / 2) + swicth.offsetTop
       };
 
-      const app = document.getElementById('app');
-
       this.swicth.idHost.forEach(element => {
-        const hostName = `host${element}`;
+        const hostName = `host${element.id}`;
 
         if (hostName === document.getElementById(hostName).id) {
           let height, tang, arctg, angle, final;
+          // переделать на поиск по ref
           const host = document.getElementById(hostName);
           const hostPosition = host.getBoundingClientRect();
 
@@ -52,12 +54,6 @@ export default {
             x: (hostPosition.width / 2) + hostPosition.x,
             y: (hostPosition.height / 2) + host.offsetTop,
           };
-
-          // Создаю линию и добавляю ее в #app
-          let line = document.createElement('div');
-          line.className = 'line'; // Линия
-          line.id = element.toString() + this.swicth.idSwitch.toString();
-          app.appendChild(line);
 
           height = Math.sqrt(Math.pow((final.x - start.x), 2) + Math.pow((final.y - start.y), 2)) - 50; // длина прямой после анимации
           tang = (final.y - start.y) / (final.x - start.x); // Тангенс
@@ -68,16 +64,15 @@ export default {
             angle = 270 + angle;
           } else if (tang > 0) {
             angle = -(90 - angle);
-          }
+          }   
 
           // разворот всех линий которые с права (не четные) на 180 градусов
           if (this.swicth.id % 2 === 0) {
             angle = 180 + angle;
           }
-
-          // назначаю
-          line.style.transform = `translate(${start.x}px, ${start.y}px) rotate(${angle}deg) translateZ(0)`;
-          line.style.height = (height + 'px');
+          
+          element.transform = `translate(${start.x}px, ${start.y}px) rotate(${angle}deg) translateZ(0)`;
+          element.height = (height + 'px');
         }
       });
     }
@@ -97,6 +92,10 @@ export default {
 
 .swicthes:nth-child(2n+1) {
   margin-right: 50%;
+}
+
+.lines {
+  position: absolute;
 }
 
 .line {
